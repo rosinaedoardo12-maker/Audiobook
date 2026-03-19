@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Audiobook Studio</title>
+    <meta name="theme-color" content="#08131f" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Audiobook Studio" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/icons/icon-app.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icons/icon-app.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/stile.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">PDF to audiobook</span>
+          <h1>Trasforma i tuoi PDF in un audiolibro con voce chiara e fluida.</h1>
+          <p>
+            Carica un PDF testuale, controlla il testo estratto, scegli una voce
+            naturale e genera un audio pronto da ascoltare o scaricare da Windows,
+            macOS e iPhone.
+          </p>
+          <div class="hero-badges">
+            <span>Anteprima testo</span>
+            <span>Edge neural gratis</span>
+            <span>Download audio</span>
+          </div>
+          <div class="hero-actions">
+            <button id="installButton" class="secondary-btn hidden">Installa app</button>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="stat-card">
+            <strong id="voiceCount">0</strong>
+            <span>Voci disponibili</span>
+          </div>
+          <div class="stat-card">
+            <strong id="healthStatus">Check</strong>
+            <span>Stato motore</span>
+          </div>
+          <div class="stat-card">
+            <strong>MP3</strong>
+            <span>Formato output</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <section class="glass-card upload-card">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">1. Sorgente</p>
+              <h2>Carica il PDF</h2>
+            </div>
+            <label class="file-trigger">
+              <input id="pdfInput" type="file" accept="application/pdf" />
+              <span>Seleziona PDF</span>
+            </label>
+          </div>
+
+          <div id="dropzone" class="dropzone">
+            <p>Trascina qui il file oppure usa il pulsante sopra.</p>
+            <small>Funziona meglio con PDF che contengono vero testo, non immagini scannerizzate.</small>
+          </div>
+
+          <div class="meta-grid">
+            <article class="meta-box">
+              <span>Titolo</span>
+              <strong id="bookTitle">Nessun file</strong>
+            </article>
+            <article class="meta-box">
+              <span>Pagine</span>
+              <strong id="pageCount">0</strong>
+            </article>
+            <article class="meta-box">
+              <span>Parole</span>
+              <strong id="wordCount">0</strong>
+            </article>
+            <article class="meta-box">
+              <span>Caratteri</span>
+              <strong id="charCount">0</strong>
+            </article>
+          </div>
+        </section>
+
+        <section class="glass-card install-card">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">App</p>
+              <h2>Usala come vera app</h2>
+            </div>
+          </div>
+          <div class="install-grid">
+            <article class="meta-box">
+              <span>Desktop</span>
+              <strong>Installa dal browser</strong>
+              <small>Su Chrome o Edge usa il pulsante Installa app per avere una finestra dedicata.</small>
+            </article>
+            <article class="meta-box">
+              <span>iPhone</span>
+              <strong>Aggiungi a Home</strong>
+              <small>Apri il sito in Safari e aggiungilo alla schermata Home per un'esperienza da app.</small>
+            </article>
+          </div>
+        </section>
+
+        <section class="glass-card controls-card">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">2. Voce</p>
+              <h2>Imposta l'audiolibro</h2>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              <span>Motore voce</span>
+              <select id="providerSelect">
+                <option value="edge">Edge Neural Gratis</option>
+                <option value="windows">Windows di sistema</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Titolo progetto</span>
+              <input id="titleInput" type="text" placeholder="Es. Il mio audiolibro" />
+            </label>
+
+            <label>
+              <span>Voce</span>
+              <select id="voiceSelect"></select>
+            </label>
+
+            <label>
+              <span>Velocita</span>
+              <input id="rateInput" type="range" min="-5" max="5" step="1" value="0" />
+              <small id="rateValue">0</small>
+            </label>
+
+            <label>
+              <span>Volume</span>
+              <input id="volumeInput" type="range" min="20" max="100" step="5" value="100" />
+              <small id="volumeValue">100%</small>
+            </label>
+          </div>
+
+          <div class="cta-row">
+            <button id="generateButton" class="primary-btn">Genera audiolibro</button>
+            <a id="downloadLink" class="secondary-btn hidden" download>Scarica audio</a>
+          </div>
+        </section>
+
+        <section class="glass-card preview-card">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">3. Revisione</p>
+              <h2>Anteprima testo estratto</h2>
+            </div>
+            <button id="clearButton" class="ghost-btn">Svuota</button>
+          </div>
+
+          <textarea
+            id="textPreview"
+            placeholder="Il testo del PDF apparira qui. Puoi anche correggerlo prima di generare l'audio."
+          ></textarea>
+        </section>
+
+        <section class="glass-card status-card">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Stato</p>
+              <h2>Messaggi del sistema</h2>
+            </div>
+          </div>
+
+          <div id="statusBox" class="status-box info">
+            Pronto per caricare un PDF e creare il tuo audiolibro con voce gratuita naturale.
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

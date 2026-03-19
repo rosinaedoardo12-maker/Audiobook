@@ -1,0 +1,26 @@
+{
+  "name": "programma-abid-wo-ah!",
+  "version": "1.0.0",
+  "description": "Desktop web app per trasformare PDF di testo in audiolibri WAV con interfaccia moderna.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "public": "node scripts/run-public.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@andresaya/edge-tts": "^1.8.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "localtunnel": "^2.0.2",
+    "multer": "^2.0.2",
+    "pdf-parse": "^1.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

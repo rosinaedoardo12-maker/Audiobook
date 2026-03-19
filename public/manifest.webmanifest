@@ -1,0 +1,19 @@
+{
+  "name": "Audiobook Studio",
+  "short_name": "Audiobook",
+  "description": "Trasforma PDF di testo in audiolibri con voci naturali e interfaccia installabile.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#08131f",
+  "theme_color": "#08131f",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/icon-app.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
