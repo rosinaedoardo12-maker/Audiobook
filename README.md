@@ -50,3 +50,6 @@ Servono soltanto:
 
 - La PWA installa l'interfaccia come app, ma la generazione audio richiede rete.
 - Per pubblicare in App Store come app nativa iOS servirebbe un wrapper mobile separato e un account Apple Developer.
+
+  test
+  
